@@ -20,28 +20,34 @@ public class PrimesFinderTool {
             
             PrimesResultSet prs=new PrimesResultSet("john");
             
-            PrimeFinder.findPrimes(new BigInteger("1"), new BigInteger("10000"), prs);
-            
-            System.out.println("Prime numbers found:");
-            
-            System.out.println(prs.getPrimes());
-            
-            
-            /*while(task_not_finished){
-                try {
-                    //check every 10ms if the idle status (10 seconds without mouse
-                    //activity) was reached. 
-                    Thread.sleep(10);
-                    if (MouseMovementMonitor.getInstance().getTimeSinceLastMouseMovement()>10000){
-                        System.out.println("Idle CPU ");
+            try {
+                PrimeFinder.findPrimes(new BigInteger("1"), new BigInteger("10000"), prs, 4);
+                while(PrimeFinder.isRunning()){
+                    try {
+                        //check every 10ms if the idle status (10 seconds without mouse
+                        //activity) was reached. 
+                        Thread.sleep(10);
+                        if (MouseMovementMonitor.getInstance().getTimeSinceLastMouseMovement()>10000){
+                            PrimeFinder.inicie();
+                            System.out.println("Idle CPU ");
+                        }
+                        else{
+                            PrimeFinder.pause();
+                            System.out.println("User working again!");
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PrimesFinderTool.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    else{
-                        System.out.println("User working again!");
-                    }
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(PrimesFinderTool.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }*/
+                
+                System.out.println("Prime numbers found:");
+            
+                System.out.println(prs.getPrimes());
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PrimesFinderTool.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
                         
             
             

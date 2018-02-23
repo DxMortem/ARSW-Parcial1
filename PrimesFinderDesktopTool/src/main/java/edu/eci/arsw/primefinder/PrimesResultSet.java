@@ -105,7 +105,6 @@ class ResultReporter {
             response = httpClient.execute(request);
             System.out.println(response.getStatusLine().getStatusCode());
             
-            
         } catch (IOException ex) {
             //Logger.getLogger(PrimesResultSet.class.getName()).log(Level.SEVERE, null, ex);
         }
